@@ -1,6 +1,5 @@
 import { Head } from "@inertiajs/react";
 import React from "react";
-import Layout from "../Layouts/Layout";
 
 const Contact = () => {
     return (
@@ -17,7 +16,5 @@ const Contact = () => {
         </div>
     );
 };
-
-Contact.layout = (page) => <Layout children={page} />;
 
 export default Contact;
