@@ -2,7 +2,14 @@ import { Head, useForm } from "@inertiajs/react";
 import React from "react";
 
 const Create = () => {
-    const { data, setData, post, errors, processing } = useForm();
+    const { data, setData, post, errors, processing } = useForm({
+        body: "",
+    });
+
+    const submit = (e) => {
+        e.preventDefault();
+        post("/posts");
+    };
 
     return (
         <>
@@ -34,12 +41,24 @@ const Create = () => {
             </div>
 
             <div className="w-1/2 mx-auto">
-                <form>
+                <form onSubmit={(e) => submit(e)}>
                     <textarea
+                        value={data?.body}
+                        onChange={(e) => setData("body", e.target.value)}
                         rows="10"
-                        className="border w-full rounded-md focus:border-blue-600 border-blue-300 p-2"
+                        className={`ring-2 ring-blue-500 w-full rounded-md focus-visible:!ring-blue-600 border-blue-300 p-2 ${
+                            errors?.body && "!ring-red-500"
+                        }`}
                     ></textarea>
-                    <button className="bg-blue-800 mt-4 text-white p-3 w-full cursor-pointer hover:bg-blue-600 rounded-xl">
+
+                    {errors?.body && (
+                        <p className="text-red-500"> {errors?.body}</p>
+                    )}
+
+                    <button
+                        className="bg-blue-800 mt-4 text-white p-3 w-full cursor-pointer hover:bg-blue-600 rounded-xl"
+                        disabled={processing}
+                    >
                         Create Post
                     </button>
                 </form>

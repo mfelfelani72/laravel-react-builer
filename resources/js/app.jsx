@@ -18,7 +18,7 @@ createInertiaApp({
 
     progress: {
         // The delay after which the progress bar will appear, in milliseconds...
-        delay: 250,
+        delay: 0,
 
         // The color of the progress bar...
         color: "#29d",
