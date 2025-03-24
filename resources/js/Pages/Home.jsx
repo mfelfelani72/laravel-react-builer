@@ -8,7 +8,7 @@ const Home = ({ posts }) => {
     return (
         <>
             <Head>
-                <title>asdsa</title>
+                <title>Home</title>
                 <meta charset="utf-8" />
                 <meta
                     name="viewport"
