@@ -1,4 +1,4 @@
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { useEffect } from "react";
 
 const Home = ({ posts }) => {
@@ -33,7 +33,7 @@ const Home = ({ posts }) => {
                 Home
             </div>
             <div>
-                {posts?.map((post, index) => (
+                {posts?.data?.map((post, index) => (
                     <div key={index} className="p-4 border-b font-bold">
                         <div className="text-sm text-slate-600">
                             <span>Posted on: </span>
@@ -44,6 +44,27 @@ const Home = ({ posts }) => {
                         <p>{post?.body}</p>
                     </div>
                 ))}
+            </div>
+
+            <div className="py-12 px-4 ">
+                {posts?.links?.map((link, index) =>
+                    link?.url ? (
+                        <Link
+                            href={link?.url}
+                            key={link?.label}
+                            dangerouslySetInnerHTML={{ __html: link?.label }}
+                            className={`px-1 mx-1 ${
+                                link?.active ? "text-blue-500 font-bold" : ""
+                            } `}
+                        />
+                    ) : (
+                        <span
+                            key={link?.label}
+                            dangerouslySetInnerHTML={{ __html: link?.label }}
+                            className="p-1 mx-1 text-slate-300"
+                        ></span>
+                    )
+                )}
             </div>
         </>
     );
