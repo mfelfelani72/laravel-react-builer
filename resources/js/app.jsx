@@ -2,12 +2,12 @@ import "./bootstrap";
 
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
-import Layout from "./Layouts/Layout";
+import Layout from "../views/js/Layouts/Layout";
 
 createInertiaApp({
     resolve: (name) => {
-        const modules = import.meta.glob("./Modules/**/*.jsx", { eager: true });
-        let module = modules[`./Modules/${name}.jsx`];
+        const modules = import.meta.glob("../views/js/Modules/**/*.jsx", { eager: true });
+        let module = modules[`../views/js/Modules/${name}.jsx`];
         module.default.layout =
             module.default.layout || ((module) => <Layout children={module} />);
         return module;

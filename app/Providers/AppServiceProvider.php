@@ -20,5 +20,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        $this->app['config']->set('view.paths', [resource_path('views/php')]);
     }
 }
