@@ -2,14 +2,28 @@ import "./bootstrap";
 
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
-import Layout from "../views/js/Layouts/Layout";
+import LayoutAdmin from "../views/js/admin/layouts/Layout";
+import LayoutUser from "../views/js/user/layouts/Layout";
 
 createInertiaApp({
     resolve: (name) => {
-        const modules = import.meta.glob("../views/js/Modules/**/*.jsx", { eager: true });
-        let module = modules[`../views/js/Modules/${name}.jsx`];
-        module.default.layout =
-            module.default.layout || ((module) => <Layout children={module} />);
+
+        let modules = null;
+        let module = null;
+        
+        if (window.location.pathname.includes('/admin')) {
+            modules = import.meta.glob("../views/js/admin/modules/**/*.jsx", { eager: true });
+            module = modules[`../views/js/admin/modules/${name}.jsx`];
+            module.default.layout =
+                module.default.layout || ((module) => <LayoutAdmin children={module} />);
+        }
+        else {
+            modules = import.meta.glob("../views/js/user/modules/**/*.jsx", { eager: true });
+            module = modules[`../views/js/user/modules/${name}.jsx`];
+            module.default.layout =
+                module.default.layout || ((module) => <LayoutUser children={module} />);
+        }
+
         return module;
     },
     setup({ el, App, props }) {

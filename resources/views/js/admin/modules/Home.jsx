@@ -1,3 +1,4 @@
+
 import { Head, Link } from "@inertiajs/react";
 import { useEffect } from "react";
 
@@ -27,7 +28,7 @@ const Home = ({ ...props }) => {
                 />
             </Head>
             <div className="py-2 font-bold text-teal-500 flex flex-row w-full justify-center">
-                This is Home and this is props{" "}
+                This is Home and this is props mohammad {" "}
                 <div className="flex flex-row gap-6">
                     {props?.message?.map((item, index) => (
                         <div key={index}>{item}</div>
