@@ -2,6 +2,8 @@ import "./bootstrap";
 
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
+import { I18nextProvider } from 'react-i18next';
+import i18n from '../../app/Utils/services/i18n';
 import LayoutAdmin from "../views/js/admin/layouts/Layout";
 import LayoutUser from "../views/js/user/layouts/Layout";
 
@@ -10,18 +12,28 @@ createInertiaApp({
 
         let modules = null;
         let module = null;
-        
+
+        // admin
         if (window.location.pathname.includes('/admin')) {
             modules = import.meta.glob("../views/js/admin/modules/**/*.jsx", { eager: true });
             module = modules[`../views/js/admin/modules/${name}.jsx`];
             module.default.layout =
-                module.default.layout || ((module) => <LayoutAdmin children={module} />);
+                module.default.layout || module.default.layout || ((module) => (
+                    <I18nextProvider i18n={i18n}>
+                        <LayoutAdmin children={module} />
+                    </I18nextProvider>
+                ));;
         }
+        // user
         else {
             modules = import.meta.glob("../views/js/user/modules/**/*.jsx", { eager: true });
             module = modules[`../views/js/user/modules/${name}.jsx`];
             module.default.layout =
-                module.default.layout || ((module) => <LayoutUser children={module} />);
+                module.default.layout || ((module) => (
+                    <I18nextProvider i18n={i18n}>
+                        <LayoutUser children={module} />
+                    </I18nextProvider>
+                ));
         }
 
         return module;
