@@ -4,8 +4,8 @@ import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../../app/Utils/services/i18n';
-import LayoutAdmin from "../views/js/admin/layouts/Layout";
-import LayoutUser from "../views/js/user/layouts/Layout";
+import AdminTheme from "../views/js/admin/themes/Theme";
+import UserTheme from "../views/js/user/themes/Theme";
 
 createInertiaApp({
     resolve: (name) => {
@@ -20,9 +20,9 @@ createInertiaApp({
             module.default.layout =
                 module.default.layout || module.default.layout || ((module) => (
                     <I18nextProvider i18n={i18n}>
-                        <LayoutAdmin children={module} />
+                        <AdminTheme children={module} />
                     </I18nextProvider>
-                ));;
+                ));
         }
         // user
         else {
@@ -31,7 +31,7 @@ createInertiaApp({
             module.default.layout =
                 module.default.layout || ((module) => (
                     <I18nextProvider i18n={i18n}>
-                        <LayoutUser children={module} />
+                        <UserTheme children={module} />
                     </I18nextProvider>
                 ));
         }

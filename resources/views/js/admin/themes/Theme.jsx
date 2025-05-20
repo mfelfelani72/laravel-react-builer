@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-const Layout = ({ children }) => {
+const Theme = ({ children }) => {
     return (
         <main>
             <header className="flex flex-row justify-center h-20 items-center px-24 text-amber-50 bg-cyan-950">
@@ -16,4 +16,4 @@ const Layout = ({ children }) => {
     );
 };
 
-export default Layout;
+export default Theme;
